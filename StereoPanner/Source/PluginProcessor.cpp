@@ -7,9 +7,12 @@
 
   ==============================================================================
 */
+#define _USE_MATH_DEFINES
 
+#include <cmath>
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+
 
 
 //==============================================================================
@@ -144,14 +147,21 @@ void StereoPannerAudioProcessor::processBlock (AudioSampleBuffer& buffer, MidiBu
     float *channelDataR = buffer.getWritePointer(1);
     
     //Calculate p'
-    float pDash = (panPosition + 1.0) / 2.0;
-
+    float pDashConstantPower = M_PI * (panPosition + 1.0) / 4.0;
+    float pDashLinear = (panPosition + 1.0) / 2.0;
     //Loop runs from 0 to num of samples in the block
     
     for(int i = 0; i < numSamples; ++i)
     {
-        channelDataL[i] =  channelDataL[i] * (1.0 - pDash);
-        channelDataR[i] =  channelDataR[i] * pDash;
+        if(togglePanMethod == true){
+            channelDataL[i] =  channelDataL[i] * std::sin(pDashConstantPower);
+            channelDataR[i] =  channelDataR[i] * std::cos(pDashConstantPower);
+        }
+        else{
+            channelDataL[i] =  channelDataL[i] * (1.0 - pDashLinear);
+            channelDataR[i] =  channelDataR[i] * pDashLinear;
+        }
+        
     }
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
@@ -187,6 +197,7 @@ void StereoPannerAudioProcessor::setStateInformation (const void* data, int size
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
 }
+
 
 //==============================================================================
 // This creates new instances of the plugin..

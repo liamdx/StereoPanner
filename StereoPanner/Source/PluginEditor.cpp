@@ -39,6 +39,10 @@ StereoPannerAudioProcessorEditor::StereoPannerAudioProcessorEditor (StereoPanner
     sliderPanPosition->setTextBoxStyle (Slider::TextBoxBelow, false, 80, 20);
     sliderPanPosition->addListener (this);
 
+    addAndMakeVisible (togglePanMethod = new ToggleButton ("new toggle button"));
+    togglePanMethod->setButtonText (TRANS("Linear / Constant Power"));
+    togglePanMethod->addListener (this);
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -57,6 +61,7 @@ StereoPannerAudioProcessorEditor::~StereoPannerAudioProcessorEditor()
     //[/Destructor_pre]
 
     sliderPanPosition = nullptr;
+    togglePanMethod = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -81,6 +86,7 @@ void StereoPannerAudioProcessorEditor::resized()
     //[/UserPreResize]
 
     sliderPanPosition->setBounds (120, 48, 152, 144);
+    togglePanMethod->setBounds (120, 216, 150, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -99,6 +105,22 @@ void StereoPannerAudioProcessorEditor::sliderValueChanged (Slider* sliderThatWas
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
+}
+
+void StereoPannerAudioProcessorEditor::buttonClicked (Button* buttonThatWasClicked)
+{
+    //[UserbuttonClicked_Pre]
+    //[/UserbuttonClicked_Pre]
+
+    if (buttonThatWasClicked == togglePanMethod)
+    {
+        processor.togglePanMethod = togglePanMethod->getState();
+        //[UserButtonCode_togglePanMethod] -- add your button handler code here..
+        //[/UserButtonCode_togglePanMethod]
+    }
+
+    //[UserbuttonClicked_Post]
+    //[/UserbuttonClicked_Post]
 }
 
 
@@ -131,6 +153,9 @@ BEGIN_JUCER_METADATA
           virtualName="" explicitFocusOrder="0" pos="120 48 152 144" min="-1"
           max="1" int="0" style="Rotary" textBoxPos="TextBoxBelow" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1" needsCallback="1"/>
+  <TOGGLEBUTTON name="new toggle button" id="71e149c4b6fceb68" memberName="togglePanMethod"
+                virtualName="" explicitFocusOrder="0" pos="120 216 150 24" buttonText="Linear / Constant Power"
+                connectedEdges="0" needsCallback="1" radioGroupId="0" state="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

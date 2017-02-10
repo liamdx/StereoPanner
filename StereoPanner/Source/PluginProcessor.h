@@ -57,6 +57,8 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     
     float panPosition;
+    bool togglePanMethod;
+    const float PI = 3.14159;
 
 private:
     //==============================================================================
