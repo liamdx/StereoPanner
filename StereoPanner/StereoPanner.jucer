@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="U9JLB6" name="StereoPanner" projectType="audioplug" version="1.0.0"
               bundleIdentifier="com.yourcompany.StereoPanner" includeBinaryInAppConfig="1"
-              buildVST="1" buildVST3="0" buildAU="1" buildAUv3="0" buildRTAS="0"
+              buildVST="1" buildVST3="0" buildAU="0" buildAUv3="0" buildRTAS="0"
               buildAAX="0" pluginName="StereoPanner" pluginDesc="StereoPanner"
               pluginManufacturer="yourcompany" pluginManufacturerCode="Manu"
               pluginCode="U9jl" pluginChannelConfigs="" pluginIsSynth="0" pluginWantsMidiIn="0"
@@ -23,8 +23,10 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="StereoPanner"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="StereoPanner"/>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="StereoPanner"
+                       osxCompatibility="10.12 SDK"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="StereoPanner"
+                       osxCompatibility="10.12 SDK"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../../../Desktop/Audio Technology/Advanced Audio Processing/JUCE/modules"/>
